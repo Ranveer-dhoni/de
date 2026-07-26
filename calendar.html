@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Bookings</title>
+    <title>Calendar</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -16,30 +16,12 @@
     <button class="nav-btn" onclick="location.href='events.html'">Events</button>
 </div>
 
-<div class="container">
-
-    <h2>Room Bookings</h2>
-
-    <div id="teacherBookingSection" class="card">
-        <h3>Create Booking</h3>
-
-        <input id="bookingRoom" placeholder="Room Name">
-        <input id="bookingDate" type="date">
-        <textarea id="bookingReason" placeholder="Reason"></textarea>
-
-        <button onclick="createBooking()">Add Booking</button>
-    </div>
-
-    <div class="card">
-        <h3>Bookings</h3>
-        <ul id="bookingList"></ul>
-    </div>
-
+<div class="container card">
+    <h2>Calendar</h2>
+    <ul id="calendarList"></ul>
 </div>
 
 <script src="auth.js"></script>
-<script src="bookings.js"></script>
+<script src="calendar.js"></script>
 </body>
 </html>
-
-

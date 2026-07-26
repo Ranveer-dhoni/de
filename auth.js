@@ -6,7 +6,6 @@ function checkAccess() {
         return;
     }
 
-    // Teacher/student restrictions
     if (location.pathname.includes("dashboard.html")) {
         if (role === "student") {
             const eventSection = document.getElementById("teacherEventSection");
@@ -20,4 +19,6 @@ function checkAccess() {
             if (bookingSection) bookingSection.style.display = "none";
         }
     }
+}
+
 }

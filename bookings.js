@@ -17,26 +17,34 @@ function createBooking() {
     bookings.push({ room, date, reason });
     saveBookings();
     renderBookings();
-
-    document.getElementById("bookingRoom").value = "";
-    document.getElementById("bookingDate").value = "";
-    document.getElementById("bookingReason").value = "";
 }
 
 function renderBookings() {
     const list = document.getElementById("bookingList");
     if (!list) return;
 
-    list.innerHTML = "";
+    const today = new Date().toISOString().split("T")[0];
 
-    bookings.forEach(b => {
-        const li = document.createElement("li");
-        li.innerHTML = `
-            <strong>${b.room}</strong> — ${b.date}<br>
-            <em>${b.reason || "No reason"}</em>
-        `;
-        list.appendChild(li);
-    });
+    const past = bookings.filter(b => b.date < today);
+    const current = bookings.filter(b => b.date >= today);
+
+    list.innerHTML = `
+        <h3>Current Bookings</h3>
+        ${current.map(b => `
+            <li>
+                <strong>${b.room}</strong> — ${b.date}<br>
+                <em>${b.reason}</em>
+            </li>
+        `).join("")}
+
+        <h3>Past Bookings</h3>
+        ${past.map(b => `
+            <li>
+                <strong>${b.room}</strong> — ${b.date}<br>
+                <em>${b.reason}</em>
+            </li>
+        `).join("")}
+    `;
 }
 
 renderBookings();
