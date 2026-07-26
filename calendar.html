@@ -8,20 +8,28 @@
 
 <body onload="checkAccess()">
 
-<div class="nav-bar card">
-    <button class="nav-btn" onclick="location.href='home.html'">Home</button>
-    <button class="nav-btn" onclick="location.href='dashboard.html'">Dashboard</button>
-    <button class="nav-btn" onclick="location.href='calendar.html'">Calendar</button>
-    <button class="nav-btn" onclick="location.href='bookings.html'">Bookings</button>
-    <button class="nav-btn" onclick="location.href='events.html'">Events</button>
-</div>
+    <div class="nav-bar card">
+        <button class="nav-btn" onclick="location.href='home.html'">Home</button>
+        <button class="nav-btn" onclick="location.href='dashboard.html'">Dashboard</button>
+        <button class="nav-btn" onclick="location.href='bookings.html'">Bookings</button>
+        <button class="nav-btn" onclick="location.href='events.html'">Events</button>
+    </div>
 
-<div class="container card">
-    <h2>Calendar</h2>
-    <ul id="calendarList"></ul>
-</div>
+    <div class="container">
 
-<script src="auth.js"></script>
-<script src="calendar.js"></script>
+        <h2>Monthly Calendar</h2>
+
+        <div class="calendar-controls">
+            <button class="nav-btn" onclick="prevMonth()">Previous</button>
+            <h3 id="monthLabel"></h3>
+            <button class="nav-btn" onclick="nextMonth()">Next</button>
+        </div>
+
+        <div id="calendarGrid" class="calendar-grid"></div>
+
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="calendar.js"></script>
 </body>
 </html>
