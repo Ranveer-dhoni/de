@@ -1,24 +1,69 @@
-const events = JSON.parse(localStorage.getItem("events") || "[]");
-const bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
-
-function renderCalendar() {
-    const list = document.getElementById("calendarList");
-    if (!list) return;
-
-    const combined = [
-        ...events.map(e => ({ type: "Event", name: e.name, date: e.date })),
-        ...bookings.map(b => ({ type: "Booking", name: b.room, date: b.date }))
-    ];
-
-    combined.sort((a, b) => a.date.localeCompare(b.date));
-
-    list.innerHTML = combined.map(item => `
-        <li>
-            <strong>${item.type}</strong>: ${item.name}<br>
-            <em>${item.date}</em>
-        </li>
-    `).join("");
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('starlight2.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
 }
 
-renderCalendar();
+.container {
+    width: 80%;
+    margin: auto;
+    padding-top: 20px;
+}
 
+.card {
+    background: rgba(0,0,0,0.6);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.nav-bar {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    background: rgba(0,0,0,0.7);
+}
+
+.nav-btn {
+    padding: 10px 20px;
+    background: #222;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.nav-btn:hover {
+    background: #444;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    padding: 10px 20px;
+    background: #008cff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0066cc;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 15px;
+}
