@@ -40,10 +40,8 @@ function deleteEvent(i) {
 
 function updateSummary() {
     const bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
-    const total = bookings.length;
-
-    const summary = document.getElementById("totalBookings");
-    if (summary) summary.textContent = "Total Bookings: " + total;
+    document.getElementById("totalBookings").textContent =
+        "Total Bookings: " + bookings.length;
 }
 
 renderEvents();

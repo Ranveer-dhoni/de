@@ -8,23 +8,20 @@ function renderAllEvents() {
     const list = document.getElementById("eventsList");
     if (!list) return;
 
-    list.innerHTML = "";
-
-    events.forEach((e, index) => {
-        const li = document.createElement("li");
-        li.innerHTML = `
+    list.innerHTML = events.map((e, i) => `
+        <li>
             <strong>${e.name}</strong> — ${e.date}<br>
-            <em>${e.description || "No description"}</em><br>
-            <button onclick="deleteEvent(${index})">Delete</button>
-        `;
-        list.appendChild(li);
-    });
+            <em>${e.description}</em><br>
+            <button onclick="deleteEvent(${i})">Delete</button>
+        </li>
+    `).join("");
 }
 
-function deleteEvent(index) {
-    events.splice(index, 1);
+function deleteEvent(i) {
+    events.splice(i, 1);
     saveEvents();
     renderAllEvents();
 }
 
 renderAllEvents();
+
