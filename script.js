@@ -17,6 +17,7 @@ function createEvent() {
     events.push({ name, date, description });
     saveEvents();
     renderEvents();
+    updateSummary();
 
     document.getElementById("eventName").value = "";
     document.getElementById("eventDate").value = "";
@@ -24,6 +25,8 @@ function createEvent() {
 }
 
 function renderEvents() {
+    events = JSON.parse(localStorage.getItem("events") || "[]");
+
     const list = document.getElementById("eventList");
     if (!list) return;
 
@@ -44,10 +47,12 @@ function deleteEvent(i) {
 }
 
 function updateSummary() {
+    events = JSON.parse(localStorage.getItem("events") || "[]");
     const bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
-    const today = new Date().toISOString().split("T")[0];
 
+    const today = new Date().toISOString().split("T")[0];
     const currentBookings = bookings.filter(b => b.date >= today);
+
     const totalBookingsEl = document.getElementById("totalBookings");
     const totalEventsEl = document.getElementById("totalEvents");
 
@@ -62,4 +67,5 @@ function updateSummary() {
 
 renderEvents();
 updateSummary();
+
 

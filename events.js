@@ -5,6 +5,8 @@ function saveEvents() {
 }
 
 function renderAllEvents() {
+    events = JSON.parse(localStorage.getItem("events") || "[]");
+
     const list = document.getElementById("eventsList");
     if (!list) return;
 
@@ -24,5 +26,6 @@ function deleteEvent(i) {
 }
 
 renderAllEvents();
+
 
 
