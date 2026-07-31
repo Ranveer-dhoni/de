@@ -1,8 +1,6 @@
-// LOAD EVENTS & BOOKINGS
 let events = JSON.parse(localStorage.getItem("events") || "[]");
 let bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
 
-// CURRENT MONTH TRACKING
 let currentDate = new Date();
 
 function renderCalendar() {
@@ -80,3 +78,4 @@ function prevMonth() {
 }
 
 renderCalendar();
+
