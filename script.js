@@ -1,3 +1,6 @@
+// ===============================
+// EVENTS SYSTEM (DASHBOARD)
+// ===============================
 let events = JSON.parse(localStorage.getItem("events") || "[]");
 
 function saveEvents() {
@@ -67,5 +70,4 @@ function updateSummary() {
 
 renderEvents();
 updateSummary();
-
 
