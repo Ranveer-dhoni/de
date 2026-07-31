@@ -9,9 +9,9 @@ function renderAllEvents() {
     if (!list) return;
 
     list.innerHTML = events.map((e, i) => `
-        <li>
+        <li class="event-card">
             <strong>${e.name}</strong> — ${e.date}<br>
-            <em>${e.description}</em><br>
+            <em>${e.description || "No description"}</em><br>
             <button onclick="deleteEvent(${i})">Delete</button>
         </li>
     `).join("");
@@ -24,4 +24,5 @@ function deleteEvent(i) {
 }
 
 renderAllEvents();
+
 

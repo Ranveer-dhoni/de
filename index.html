@@ -9,7 +9,7 @@
 <body>
 
 <div class="container card">
-    <h2>Login</h2>
+    <h2>Space Hub Login</h2>
 
     <input id="username" placeholder="Username">
     <input id="password" type="password" placeholder="Password">
@@ -33,6 +33,11 @@
         const password = document.getElementById("password").value.trim();
         const selectedRole = document.getElementById("role").value;
 
+        if (!username || !password) {
+            alert("Enter username and password");
+            return;
+        }
+
         const match = accounts.find(
             acc => acc.username === username &&
                    acc.password === password &&
@@ -47,11 +52,12 @@
         localStorage.setItem("username", match.username);
         localStorage.setItem("role", match.role);
 
-        location.href = "dashboard.html";
+        location.href = "home.html";
     }
 </script>
 
 </body>
 </html>
+
 
 

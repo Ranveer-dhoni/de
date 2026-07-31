@@ -1,11 +1,13 @@
 function checkAccess() {
     const role = localStorage.getItem("role");
+    const username = localStorage.getItem("username");
 
-    if (!role) {
+    if (!role || !username) {
         location.href = "index.html";
         return;
     }
 
+    // Hide teacher-only sections for students
     if (location.pathname.includes("dashboard.html")) {
         if (role === "student") {
             const eventSection = document.getElementById("teacherEventSection");
@@ -20,4 +22,11 @@ function checkAccess() {
         }
     }
 }
+
+function logout() {
+    localStorage.removeItem("username");
+    localStorage.removeItem("role");
+    location.href = "index.html";
+}
+
 

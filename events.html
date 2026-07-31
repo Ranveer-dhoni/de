@@ -9,15 +9,21 @@
 <body onload="checkAccess()">
 
 <div class="nav-bar card">
+    <button class="nav-btn" onclick="location.href='home.html'">Home</button>
     <button class="nav-btn" onclick="location.href='dashboard.html'">Dashboard</button>
     <button class="nav-btn" onclick="location.href='calendar.html'">Calendar</button>
     <button class="nav-btn" onclick="location.href='bookings.html'">Bookings</button>
     <button class="nav-btn" onclick="location.href='events.html'">Events</button>
 </div>
 
-<div class="container card">
+<div class="container">
+
     <h2>All Events</h2>
-    <ul id="eventsList"></ul>
+
+    <div class="card">
+        <ul id="eventsList"></ul>
+    </div>
+
 </div>
 
 <script src="auth.js"></script>

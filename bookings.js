@@ -17,6 +17,10 @@ function createBooking() {
     bookings.push({ room, date, reason });
     saveBookings();
     renderBookings();
+
+    document.getElementById("bookingRoom").value = "";
+    document.getElementById("bookingDate").value = "";
+    document.getElementById("bookingReason").value = "";
 }
 
 function renderBookings() {
@@ -33,7 +37,7 @@ function renderBookings() {
         ${current.map(b => `
             <li>
                 <strong>${b.room}</strong> — ${b.date}<br>
-                <em>${b.reason}</em>
+                <em>${b.reason || "No reason"}</em>
             </li>
         `).join("")}
 
@@ -41,11 +45,12 @@ function renderBookings() {
         ${past.map(b => `
             <li>
                 <strong>${b.room}</strong> — ${b.date}<br>
-                <em>${b.reason}</em>
+                <em>${b.reason || "No reason"}</em>
             </li>
         `).join("")}
     `;
 }
 
 renderBookings();
+
 
