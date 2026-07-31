@@ -1,81 +1,87 @@
-let events = JSON.parse(localStorage.getItem("events") || "[]");
-let bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
+document.addEventListener("DOMContentLoaded", () => {
 
-let currentDate = new Date();
+    let currentDate = new Date();
 
-function renderCalendar() {
-    events = JSON.parse(localStorage.getItem("events") || "[]");
-    bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
-
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-
-    const monthLabel = document.getElementById("monthLabel");
-    monthLabel.textContent = `${firstDay.toLocaleString("default", { month: "long" })} ${year}`;
-
-    const grid = document.getElementById("calendarGrid");
-    grid.innerHTML = "";
-
-    const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    weekdays.forEach(day => {
-        const header = document.createElement("div");
-        header.classList.add("calendar-header");
-        header.textContent = day;
-        grid.appendChild(header);
-    });
-
-    for (let i = 0; i < firstDay.getDay(); i++) {
-        const empty = document.createElement("div");
-        empty.classList.add("calendar-cell");
-        grid.appendChild(empty);
+    function getEvents() {
+        return JSON.parse(localStorage.getItem("events") || "[]");
     }
 
-    for (let date = 1; date <= lastDay.getDate(); date++) {
-        const cell = document.createElement("div");
-        cell.classList.add("calendar-cell");
+    function getBookings() {
+        return JSON.parse(localStorage.getItem("bookings") || "[]");
+    }
 
-        const fullDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(date).padStart(2, "0")}`;
+    function renderCalendar() {
+        const events = getEvents();
+        const bookings = getBookings();
 
-        cell.innerHTML = `<strong>${date}</strong>`;
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
 
-        events.forEach(e => {
-            if (e.date === fullDate) {
-                const tag = document.createElement("div");
-                tag.classList.add("calendar-tag", "event-tag");
-                tag.textContent = e.name;
-                cell.appendChild(tag);
-            }
+        const monthLabel = document.getElementById("monthLabel");
+        monthLabel.textContent = `${firstDay.toLocaleString("default", { month: "long" })} ${year}`;
+
+        const grid = document.getElementById("calendarGrid");
+        grid.innerHTML = "";
+
+        const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        weekdays.forEach(day => {
+            const header = document.createElement("div");
+            header.classList.add("calendar-header");
+            header.textContent = day;
+            grid.appendChild(header);
         });
 
-        bookings.forEach(b => {
-            if (b.date === fullDate) {
-                const tag = document.createElement("div");
-                tag.classList.add("calendar-tag", "booking-tag");
-                tag.textContent = b.room;
-                cell.appendChild(tag);
-            }
-        });
-
-        if (new Date(fullDate) < new Date()) {
-            cell.classList.add("past-date");
+        for (let i = 0; i < firstDay.getDay(); i++) {
+            const empty = document.createElement("div");
+            empty.classList.add("calendar-cell");
+            grid.appendChild(empty);
         }
 
-        grid.appendChild(cell);
+        for (let date = 1; date <= lastDay.getDate(); date++) {
+            const cell = document.createElement("div");
+            cell.classList.add("calendar-cell");
+
+            const fullDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(date).padStart(2, "0")}`;
+            cell.innerHTML = `<strong>${date}</strong>`;
+
+            events.forEach(e => {
+                if (e.date === fullDate) {
+                    const tag = document.createElement("div");
+                    tag.classList.add("calendar-tag", "event-tag");
+                    tag.textContent = e.name;
+                    cell.appendChild(tag);
+                }
+            });
+
+            bookings.forEach(b => {
+                if (b.date === fullDate) {
+                    const tag = document.createElement("div");
+                    tag.classList.add("calendar-tag", "booking-tag");
+                    tag.textContent = b.room;
+                    cell.appendChild(tag);
+                }
+            });
+
+            if (new Date(fullDate) < new Date()) {
+                cell.classList.add("past-date");
+            }
+
+            grid.appendChild(cell);
+        }
     }
-}
 
-function nextMonth() {
-    currentDate.setMonth(currentDate.getMonth() + 1);
+    window.nextMonth = function () {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar();
+    };
+
+    window.prevMonth = function () {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        renderCalendar();
+    };
+
     renderCalendar();
-}
-
-function prevMonth() {
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    renderCalendar();
-}
-
-renderCalendar();
+});
 
